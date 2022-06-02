@@ -259,6 +259,25 @@ public class Databases extends SQLiteOpenHelper {
         }
         return list;
     }
+    public ArrayList<DiaDanh> getTopDiaDanh() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<DiaDanh> list = new ArrayList<>();
+        String sql = "SELECT * FROM " + Databases.TABLE_DIADANH;
+        Cursor cursor = db.rawQuery(sql, null);
+        for (int i = 0; i < 6; i++) {
+            cursor.moveToPosition(i);
+            int idDiaDanh = cursor.getInt(0);
+            String nameDiaDanh = cursor.getString(1);
+            String imDiaDanh = cursor.getString(2);
+            String imageInt = cursor.getString(3);
+            String city = cursor.getString(4);
+            int favorite = cursor.getInt(5);
+            Vehicle vehicle = getVedicleID(cursor.getInt(6));
+
+            list.add(new DiaDanh(idDiaDanh,nameDiaDanh, imDiaDanh, imageInt,city,favorite, vehicle));
+        }
+        return list;
+    }
 
     @SuppressLint("Range")
     public DiaDanh getDiaDanhById(int id) {

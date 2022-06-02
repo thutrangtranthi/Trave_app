@@ -2,6 +2,8 @@ package com.tranthithutrang.trave_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recentRecycler;
     RecentsAdapter recentsAdapter;
+
     ListView lvTopplaces;
     DiaDanhAdapter diaDanhAdapter;
     ArrayList<DiaDanh> diaDanhList;
@@ -45,30 +48,44 @@ public class MainActivity extends AppCompatActivity {
 
         linkView();
         loadData();
+        addEvent();
+    }
+
+    private void addEvent() {
+        lvTopplaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                DiaDanh diaDanh = diaDanhs.get(i);
+                intent.putExtra("Name", diaDanh.getNameDiaDanh());
+                intent.putExtra("City", diaDanh.getCity());
+                intent.putExtra("Image_INT", diaDanh.getImage_int());
+                intent.putExtra("Image", diaDanh.getImDiaDanh());
+                intent.putExtra("Favourite", diaDanh.getFavotite());
+                startActivity(intent);
+            }
+        });
     }
 
     private void linkView() {
+
         lvTopplaces = findViewById(R.id.lvTopplaces);
     }
 
     private void loadData() {
 
-        diaDanhs = db.getDiaDanh();
-//        Cursor cursor = db.getDiaDanh();
-//        while (cursor.moveToNext()){
-//            diaDanhs.add(new DiaDanh(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4), cursor.getInt(5), db.getVedicleID(cursor.getInt(6))));
-//        }
-//        cursor.close();
+        diaDanhs = db.getTopDiaDanh();
         diaDanhAdapter = new DiaDanhAdapter(MainActivity.this, R.layout.top_places_row_item, diaDanhs);
         lvTopplaces.setAdapter(diaDanhAdapter);
+        setRecentRecycler(diaDanhList);
     }
 
-    private void setRecentRecycler(List<DiaDanh> recentsDataList){
-
+    private void setRecentRecycler(List<DiaDanh> diaDanhList){
+        diaDanhList = db.getFavorite();
         recentRecycler = findViewById(R.id.recent_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recentRecycler.setLayoutManager(layoutManager);
-        recentsAdapter = new RecentsAdapter(this, recentsDataList);
+        recentsAdapter = new RecentsAdapter(this, (ArrayList<DiaDanh>) diaDanhList);
         recentRecycler.setAdapter(recentsAdapter);
 
     }
