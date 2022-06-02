@@ -7,7 +7,7 @@
     tools:context=".DetailsActivity">
 
     <ImageView
-        android:id="@+id/imgAnnhChinh"
+        android:id="@+id/imgAnhChinh"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -24,10 +24,11 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+        app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+        android:onClick="goback"/>
 
     <TextView
-        android:id="@+id/txtMugh"
+        android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -37,16 +38,16 @@
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgAnnhChinh" />
+        app:layout_constraintTop_toBottomOf="@+id/imgAnhChinh" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtMugh"
+        app:layout_constraintBottom_toBottomOf="@+id/txtName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtMugh"
+        app:layout_constraintTop_toTopOf="@+id/txtName"
         app:srcCompat="@drawable/star" />
 
     <TextView
@@ -67,14 +68,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Available flight :"
+        android:text="City :"
         android:textColor="#044363"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/txtMugh"
-        app:layout_constraintTop_toBottomOf="@+id/txtMugh" />
+        app:layout_constraintStart_toStartOf="@+id/txtName"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
     <TextView
-        android:id="@+id/txtDate"
+        android:id="@+id/txtCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -131,15 +132,18 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/img3" />
 
-    <ImageView
-        android:id="@+id/txtTym"
+    <ImageButton
+        android:id="@+id/btnFavouite"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
+        android:background="@color/white"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_like_24"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/like" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnStart"
@@ -151,10 +155,10 @@
         android:fontFamily="@font/rubik"
         android:text="Start Booking Your Trip"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/txtTym"
+        app:layout_constraintBottom_toBottomOf="@+id/btnFavouite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtTym"
-        app:layout_constraintTop_toTopOf="@+id/txtTym" />
+        app:layout_constraintStart_toEndOf="@+id/btnFavouite"
+        app:layout_constraintTop_toTopOf="@+id/btnFavouite" />
 
    
 

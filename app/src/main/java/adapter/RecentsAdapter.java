@@ -1,9 +1,8 @@
 package adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,22 +12,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.tranthithutrang.trave_app.MainActivity;
+import com.bumptech.glide.Glide;
+import com.tranthithutrang.trave_app.DetailsActivity;
 import com.tranthithutrang.trave_app.R;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
+import java.util.ArrayList;
 
 import models.DiaDanh;
 
-public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsViewHolder>{
+public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsViewHolder> {
 
-    Context context;
-    List<DiaDanh> diaDanhList;
 
-    public RecentsAdapter(Context context, List<DiaDanh> diaDanhList) {
+    private  Context context;
+    private ArrayList<DiaDanh> diaDanhList;
+
+
+    public RecentsAdapter(Context context, ArrayList<DiaDanh> diaDanhList) {
         this.context = context;
         this.diaDanhList = diaDanhList;
     }
@@ -37,39 +36,54 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
     @Override
     public RecentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.recents_row_item, parent, false);
+            View view = LayoutInflater.from(context).inflate(R.layout.recents_row_item, parent, false);
 
-        // here we create a recyclerview row item layout file
-        return new RecentsViewHolder(view);
+            // here we create a recyclerview row item layout file
+            return new RecentsViewHolder(view);
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecentsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecentsViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.countryName.setText(diaDanhList.get(position).getCity());
         holder.placeName.setText(diaDanhList.get(position).getNameDiaDanh());
-        URL image = null;
-        try {
-            image = new URL(diaDanhList.get(position).getImDiaDanh());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        Bitmap bitmap = null;
-        try {
-            bitmap = BitmapFactory.decodeStream(image.openConnection().getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        holder.placeImage.setImageBitmap(bitmap);
+//        Bitmap bitmap = null;
+//        try {
+//            URL urlConnection = new URL(diaDanhList.get(position).getImage_int());
+//            HttpURLConnection connection = (HttpURLConnection) urlConnection
+//                    .openConnection();
+//            connection.setDoInput(true);
+//            connection.connect();
+//            InputStream input = connection.getInputStream();
+//            bitmap = BitmapFactory.decodeStream(input);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        holder.placeImage.setImageBitmap(bitmap);
+
+
+        String image = diaDanhList.get(position).getImage_int();
+        Glide.with(context)
+                .load(image)
+                .error(R.drawable.ic_baseline_terrain_24)
+                .skipMemoryCache(true)
+                .into(holder.placeImage);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(context, MainActivity.class);
+                Intent i = new Intent(context, DetailsActivity.class);
+                DiaDanh diaDanh = diaDanhList.get(position);
+                i.putExtra("Name", diaDanh.getNameDiaDanh());
+                i.putExtra("City", diaDanh.getCity());
+                i.putExtra("Image_INT", diaDanh.getImage_int());
+                i.putExtra("Image", diaDanh.getImDiaDanh());
+                i.putExtra("Favourite", diaDanh.getFavotite());
                 context.startActivity(i);
             }
         });
-
     }
 
     @Override
@@ -91,4 +105,6 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
 
         }
     }
+
+
 }
