@@ -9,12 +9,12 @@ public class DiaDanh {
     private String image_int;
     private String city;
     private int favotite;
-    private  Vehicle idPT;
+    private  int idPT;
 
     public DiaDanh() {
     }
 
-    public DiaDanh(int idDiaDanh, String nameDiaDanh, String imDiaDanh, String image_int, String city, int favotite, Vehicle idPT) {
+    public DiaDanh(int idDiaDanh, String nameDiaDanh, String imDiaDanh, String image_int, String city, int favotite, int idPT) {
         this.idDiaDanh = idDiaDanh;
         this.nameDiaDanh = nameDiaDanh;
         this.imDiaDanh = imDiaDanh;
@@ -23,6 +23,7 @@ public class DiaDanh {
         this.favotite = favotite;
         this.idPT = idPT;
     }
+
 
 
     public int getIdDiaDanh() {
@@ -73,11 +74,11 @@ public class DiaDanh {
         this.favotite = favotite;
     }
 
-    public Vehicle getIdPT() {
+    public int getIdPT() {
         return idPT;
     }
 
-    public void setIdPT(Vehicle idPT) {
+    public void setIdPT(int idPT) {
         this.idPT = idPT;
     }
 

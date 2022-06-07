@@ -1,5 +1,6 @@
 package adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.tranthithutrang.trave_app.MainActivity;
 import com.tranthithutrang.trave_app.R;
 
 import java.util.ArrayList;
@@ -18,16 +18,15 @@ import models.DiaDanh;
 
 public class DiaDanhAdapter extends BaseAdapter {
 
-    private MainActivity context;
+    private Activity context;
     private int item_layout;
     private ArrayList<DiaDanh> diaDanhs;
 
 
-    public DiaDanhAdapter(MainActivity context, int item_layout, ArrayList<DiaDanh> diaDanhs ) {
+    public DiaDanhAdapter(Activity context, int item_layout, ArrayList<DiaDanh> diaDanhs ) {
         this.context = context;
         this.item_layout = item_layout;
         this.diaDanhs = diaDanhs;
-
     }
 
     @Override
@@ -57,19 +56,6 @@ public class DiaDanhAdapter extends BaseAdapter {
         DiaDanh d = diaDanhs.get(i);
         viewHolder.placeName.setText(d.getNameDiaDanh());
         viewHolder.countryName.setText(d.getCity());
-//        Bitmap bitmap = null;
-//        try {
-//            URL urlConnection = new URL(d.getImage_int());
-//            HttpURLConnection connection = (HttpURLConnection) urlConnection
-//                    .openConnection();
-//            connection.setDoInput(true);
-//            connection.connect();
-//            InputStream input = connection.getInputStream();
-//            bitmap = BitmapFactory.decodeStream(input);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        viewHolder.placeImage.setImageBitmap(bitmap);
         String image = d.getImage_int();
         Glide.with(context)
                 .load(image)

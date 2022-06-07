@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import adapter.ExpAdapter;
 import models.DiaDanh;
 import models.Experience;
+import models.Group;
 import models.Hotel;
 import models.User;
 import models.Vehicle;
@@ -192,7 +193,17 @@ public class Databases extends SQLiteOpenHelper {
         }
     }
 
-    public int editUser(String name, String username, String password, String email, String phone) {
+    public int deleteUser(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result = db.delete(Databases.TABLE_USER, Databases.COLUMN_ID + " = " + id, null);
+        if (result == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public int editUser(String name, String username, String password, String email, String phone, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Databases.COLUMN_USERNAME, username);
@@ -200,6 +211,7 @@ public class Databases extends SQLiteOpenHelper {
         values.put(Databases.COLUMN_NAME, name);
         values.put(Databases.COLUMN_PHONE, phone);
         values.put(Databases.COLUMN_EMAIL, email);
+        values.put(Databases.COLUMN_ID_GROUP, id);
         String sql = "SELECT * FROM " + Databases.TABLE_USER + " WHERE " +
                 Databases.COLUMN_USERNAME + " = '" + username + "'";
         Cursor cursor = db.rawQuery(sql, null);
@@ -253,7 +265,7 @@ public class Databases extends SQLiteOpenHelper {
             String imageInt = cursor.getString(3);
             String city = cursor.getString(4);
             int favorite = cursor.getInt(5);
-            Vehicle vehicle = getVedicleID(cursor.getInt(6));
+            int vehicle = cursor.getInt(6);
 
             list.add(new DiaDanh(idDiaDanh,nameDiaDanh, imDiaDanh, imageInt,city,favorite, vehicle));
         }
@@ -272,7 +284,7 @@ public class Databases extends SQLiteOpenHelper {
             String imageInt = cursor.getString(3);
             String city = cursor.getString(4);
             int favorite = cursor.getInt(5);
-            Vehicle vehicle = getVedicleID(cursor.getInt(6));
+            int vehicle = cursor.getInt(6);
 
             list.add(new DiaDanh(idDiaDanh,nameDiaDanh, imDiaDanh, imageInt,city,favorite, vehicle));
         }
@@ -311,14 +323,16 @@ public class Databases extends SQLiteOpenHelper {
     }
 
 
-    public int editDiaDanh(int id, String name, String image, String city, int favorite) {
+    public int editDiaDanh(int id, String name, String image,String image_int, String city, int favorite, int id_pt) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Databases.COLUMN_ID_DIADANH, id);
         values.put(Databases.COLUMN_NAME, name);
         values.put(Databases.COLUMN_IMAGE, image);
+        values.put(Databases.COLUMN_IMAGE_INT, image_int);
         values.put(Databases.COLUMN_CITY, city);
         values.put(Databases.COLUMN_FAVORITE, favorite);
+        values.put(Databases.COLUMN_ID_PT, id_pt);
         String sql = "SELECT * FROM " + Databases.TABLE_DIADANH + " WHERE " + Databases.COLUMN_ID_DIADANH + " = " + id;
         Cursor cursor = db.rawQuery(sql, null);
         if (cursor.getCount() > 0) {
@@ -335,13 +349,15 @@ public class Databases extends SQLiteOpenHelper {
     }
 
 
-    public int addDiaDanh(String name, String image, String city, int favorite) {
+    public int addDiaDanh(String name, String image, String image_int, String city, int favorite, int id_pt) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Databases.COLUMN_NAME, name);
         values.put(Databases.COLUMN_IMAGE, image);
+        values.put(Databases.COLUMN_IMAGE_INT, image_int);
         values.put(Databases.COLUMN_CITY, city);
         values.put(Databases.COLUMN_FAVORITE, favorite);
+        values.put(Databases.COLUMN_ID_PT, id_pt);
         long result = db.insert(Databases.TABLE_DIADANH, null, values);
         if (result == -1) {
             return 0;
@@ -384,7 +400,7 @@ public class Databases extends SQLiteOpenHelper {
             String imageInt = cursor.getString(3);
             String city = cursor.getString(4);
             int favorite = cursor.getInt(5);
-            Vehicle vehicle = getVedicleID(cursor.getInt(6));
+            int vehicle = cursor.getInt(6);
 
             list.add(new DiaDanh(idDiaDanh,nameDiaDanh, imDiaDanh, imageInt,city,favorite, vehicle));
         }
@@ -399,7 +415,7 @@ public class Databases extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            DiaDanh diaDanh = new DiaDanh(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), getVedicleID(cursor.getInt(6)));
+            DiaDanh diaDanh = new DiaDanh(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), cursor.getInt(6));
 
             list.add(diaDanh);
             cursor.moveToNext();
@@ -463,7 +479,7 @@ public class Databases extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            DiaDanh diaDanh = new DiaDanh(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), getVedicleID(cursor.getInt(6)));
+            DiaDanh diaDanh = new DiaDanh(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getInt(5), cursor.getInt(6));
             diaDanh.setIdDiaDanh(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_ID_DIADANH))));
             diaDanh.setNameDiaDanh(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_NAME)));
             diaDanh.setImDiaDanh(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_IMAGE)));
@@ -493,13 +509,44 @@ public class Databases extends SQLiteOpenHelper {
             Vehicle vehicle = new Vehicle();
             vehicle.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_ID_PT))));
             vehicle.setName(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_NAME)));
-            vehicle.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_ID_DIADANH))));
 
             list.add(vehicle);
             cursor.moveToNext();
         }
         Log.d("ketqua", String.valueOf(list));
         return list;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<Group> getGroup() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<Group> list = new ArrayList<>();
+        String sql = "SELECT * FROM " + Databases.TABLE_GROUP;
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Group group = new Group();
+            group.setIdGroup(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_ID_GROUP))));
+            group.setName(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_NAME)));
+
+            list.add(group);
+            cursor.moveToNext();
+        }
+        Log.d("ketqua", String.valueOf(list));
+        return list;
+    }
+
+    @SuppressLint("Range")
+    public Group getGroupID(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Group group = null;
+        String sql = "SELECT * FROM " + Databases.TABLE_GROUP + " WHERE " + Databases.COLUMN_ID_GROUP + " = " + id;
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (cursor.moveToNext()) {
+            group = new Group(cursor.getInt(0),cursor.getString(1));
+        }
+        return group;
     }
 
     @SuppressLint("Range")
@@ -657,7 +704,4 @@ public class Databases extends SQLiteOpenHelper {
         Log.d("ketqua", String.valueOf(list));
         return list;
     }
-
-
-
 }
