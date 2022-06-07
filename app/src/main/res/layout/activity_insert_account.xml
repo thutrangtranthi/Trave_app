@@ -1,29 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    tools:context=".InsertAccountActivity">
 
     <EditText
-        android:id="@+id/edtAccountName"
+        android:id="@+id/edtthemAccountUserName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="#006df0"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Họ và tên"
+        android:hint="UserName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edtAccountEmail"
+        android:id="@+id/edtthemAccountName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#006df0"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtthemAccountUserName" />
+
+    <EditText
+        android:id="@+id/edtthemAccountEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -35,10 +50,10 @@
         android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAccountName" />
+        app:layout_constraintTop_toBottomOf="@+id/edtthemAccountName" />
 
     <EditText
-        android:id="@+id/edtAccountPhone"
+        android:id="@+id/edtthemAccountPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -46,14 +61,15 @@
         android:layout_marginEnd="20dp"
         android:backgroundTint="#006df0"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Số điện thoại"
+        android:inputType="textPassword"
+        android:hint="Phone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAccountEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/edtthemAccountEmail" />
 
     <EditText
-        android:id="@+id/edtAccountPassword"
+        android:id="@+id/edtthemAccountPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -66,20 +82,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAccountPhone" />
+        app:layout_constraintTop_toBottomOf="@+id/edtthemAccountPhone"
+        tools:ignore="DuplicateIds" />
 
-    <Button
-        android:id="@+id/btnAccountChange"
+    <Spinner
+        android:id="@+id/spnUser"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="70dp"
         android:layout_marginEnd="20dp"
-        android:text="Thay đổi"
-        android:backgroundTint="#006df0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtAccountPassword" />
+        app:layout_constraintTop_toTopOf="@+id/edtthemAccountPassword" />
+
+    <Button
+        android:id="@+id/btnthemAccountChange"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#006df0"
+        android:text="Thêm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnUser" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

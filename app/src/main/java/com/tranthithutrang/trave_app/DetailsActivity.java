@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import models.DiaDanh;
+
 public class DetailsActivity extends AppCompatActivity {
 
     ImageButton btnFavouite;
@@ -27,6 +29,30 @@ public class DetailsActivity extends AppCompatActivity {
 
         linkViews();
         initActivity();
+        addEvent();
+    }
+
+    private void addEvent() {
+        btnFavouite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                DiaDanh newDiaDanh = new DiaDanh(
+                        intent.getIntExtra("ID",0),
+                        intent.getStringExtra("Name"),
+                        intent.getStringExtra("Image"),
+                        intent.getStringExtra("Image_INT"),
+                        intent.getStringExtra("City"),
+                        intent.getIntExtra("Favorite",0),
+                        intent.getIntExtra("IDPT",0)
+                );
+                if(intent.getIntExtra("Favourite",0) == 1){
+                    MainActivity.db.editDiaDanh(newDiaDanh.getIdDiaDanh(),newDiaDanh.getNameDiaDanh(),newDiaDanh.getImDiaDanh(),newDiaDanh.getImage_int(),newDiaDanh.getCity(),0,newDiaDanh.getIdPT());
+                }else{
+                    MainActivity.db.editDiaDanh(newDiaDanh.getIdDiaDanh(),newDiaDanh.getNameDiaDanh(),newDiaDanh.getImDiaDanh(),newDiaDanh.getImage_int(),newDiaDanh.getCity(),1,newDiaDanh.getIdPT());
+                }
+            }
+        });
     }
 
     private void initActivity() {

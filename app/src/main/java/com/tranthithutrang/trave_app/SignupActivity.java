@@ -15,15 +15,44 @@ public class SignupActivity extends AppCompatActivity {
     Button btnSignupSignup, btnSignupExit;
     Databases db;
 
-    private void Mapping() {
-        edtSignupName = (EditText) findViewById(R.id.edtSignupName);
-        edtSignupPhone = (EditText) findViewById(R.id.edtSignupPhone);
-        edtSignupEmail = (EditText) findViewById(R.id.edtSignupEmail);
-        edtSignupUsername = (EditText) findViewById(R.id.edtSignupUsername);
-        edtSignupPassword = (EditText) findViewById(R.id.edtSignupPassword);
-        edtSignupConfirmPassword = (EditText) findViewById(R.id.edtSignupConfirmPassword);
-        btnSignupSignup = (Button) findViewById(R.id.btnSignupSignup);
-        btnSignupExit = (Button) findViewById(R.id.btnSignupExit);
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup_avtivity);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+        linkView();
+
+        db = new Databases(this);
+        btnSignupSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Signup();
+            }
+        });
+        btnSignupExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
+    }
+
+    private void linkView() {
+        edtSignupName = findViewById(R.id.edtSignupName);
+        edtSignupPhone = findViewById(R.id.edtSignupPhone);
+        edtSignupEmail = findViewById(R.id.edtSignupEmail);
+        edtSignupUsername = findViewById(R.id.edtSignupUsername);
+        edtSignupPassword = findViewById(R.id.edtSignupPassword);
+        edtSignupConfirmPassword = findViewById(R.id.edtSignupConfirmPassword);
+        btnSignupSignup = findViewById(R.id.btnSignupSignup);
+        btnSignupExit = findViewById(R.id.btnSignupExit);
     }
 
     private void Signup(){
@@ -40,55 +69,43 @@ public class SignupActivity extends AppCompatActivity {
             String email = edtSignupEmail.getText().toString().trim();
             String confirmPassword = edtSignupConfirmPassword.getText().toString().trim();
 
-            if (password.equals(confirmPassword)) {
-                int check = db.checkUsername(username);
-                if (check == 0) {
-                    db.openDataBase();
-                    int insert = db.addUser(name, username, password, email, phone, 2);
-                    if (insert == 1) {
-                        Toast.makeText(SignupActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+
+            if (PhoneUp(phone)){
+                if (password.equals(confirmPassword)) {
+                    int check = db.checkUsername(username);
+                    if (check == 0) {
+                        db.openDataBase();
+                        int insert = db.addUser(name, username, password, email, phone, 1);
+                        if (insert == 1) {
+                            Toast.makeText(SignupActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                        }
+                        else {
+                            Toast.makeText(SignupActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else {
-                        Toast.makeText(SignupActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
-                    Toast.makeText(SignupActivity.this, "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
+                    edtSignupPassword.setText("");
+                    edtSignupConfirmPassword.setText("");
                 }
-            }
-            else {
-                Toast.makeText(SignupActivity.this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
-                edtSignupPassword.setText("");
-                edtSignupConfirmPassword.setText("");
+            }else {
+                Toast.makeText(SignupActivity.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                edtSignupPhone.setText("");
             }
         }
     }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup_avtivity);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
+    private boolean PhoneUp(String SDT){
+        if(SDT.length() == 10){
+            return true;
+        }else {
+            return false;
         }
 
-        Mapping();
-        db = new Databases(this);
-        btnSignupSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Signup();
-            }
-        });
-        btnSignupExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                finish();
-            }
-        });
     }
+
 }

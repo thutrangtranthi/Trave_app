@@ -48,22 +48,6 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
 
         holder.countryName.setText(diaDanhList.get(position).getCity());
         holder.placeName.setText(diaDanhList.get(position).getNameDiaDanh());
-//        Bitmap bitmap = null;
-//        try {
-//            URL urlConnection = new URL(diaDanhList.get(position).getImage_int());
-//            HttpURLConnection connection = (HttpURLConnection) urlConnection
-//                    .openConnection();
-//            connection.setDoInput(true);
-//            connection.connect();
-//            InputStream input = connection.getInputStream();
-//            bitmap = BitmapFactory.decodeStream(input);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        holder.placeImage.setImageBitmap(bitmap);
-
-
         String image = diaDanhList.get(position).getImage_int();
         Glide.with(context)
                 .load(image)

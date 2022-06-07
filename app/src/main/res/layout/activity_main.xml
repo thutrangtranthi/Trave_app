@@ -150,32 +150,32 @@
 
 
         <ImageButton
-            android:id="@+id/imgbHome"
+            android:id="@+id/imgbUser"
             android:layout_width="24dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:backgroundTint="#F5F7F7"
             android:rotationX="4"
             android:scaleType="fitCenter"
-            android:src="@drawable/home" />
+            android:src="@drawable/customer" />
 
         <ImageButton
-            android:id="@+id/imgbUser"
-            android:layout_width="24dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:backgroundTint="#F5F7F7"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/customer" />
-
-        <ImageButton
-            android:id="@+id/imgbHotel"
+            android:id="@+id/imgbExp"
             android:layout_width="24dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:backgroundTint="#F5F7F7"
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/experience" />
+
+        <ImageButton
+            android:id="@+id/imgbLogout"
+            android:layout_width="24dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:backgroundTint="#F5F7F7"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/img" />
 
     </LinearLayout>
 
