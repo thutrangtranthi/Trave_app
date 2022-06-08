@@ -17,7 +17,6 @@ import models.Experience;
 public class ExpActivity extends AppCompatActivity {
     ArrayList<Experience> list;
     ExpAdapter adapter;
-    Databases db;
     ListView listView;
 
     @Override
@@ -25,7 +24,6 @@ public class ExpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exp);
 
-        db = new Databases(this);
 
         this.setTitle("Kinh nghiệm du lịch");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -53,7 +51,7 @@ public class ExpActivity extends AppCompatActivity {
     private void loadData() {
         listView = (ListView) findViewById(R.id.lvExperience);
         list = new ArrayList<>();
-        list = db.getExperience();
+        list = MainActivity.db.getExperience();
         adapter = new ExpAdapter(this, list);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

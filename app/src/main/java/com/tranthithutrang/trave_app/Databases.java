@@ -171,6 +171,7 @@ public class Databases extends SQLiteOpenHelper {
             user.setUsername(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_USERNAME)));
             user.setPassword(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_PASSWORD)));
             user.setEmail(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_EMAIL)));
+            user.setPhone(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_PHONE)));
             user.setIdGroup(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_ID_GROUP))));
         }
         return user;

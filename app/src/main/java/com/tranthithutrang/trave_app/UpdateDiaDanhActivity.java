@@ -24,7 +24,6 @@ public class UpdateDiaDanhActivity extends AppCompatActivity {
     EditText edtName, edtImage, edtImageDetail1, edtImageDetail2,
             edtImageDetail3, edtCity;
     Button btnSua, btnThoat;
-    Databases db;
     Spinner spnUpdateVehicle;
 
 
@@ -38,17 +37,17 @@ public class UpdateDiaDanhActivity extends AppCompatActivity {
         this.setTitle("Sửa địa danh");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        db = new Databases(this);
-        ArrayList<Vehicle> vehicles = db.getVedicle();
         ArrayList<String> vehicleName = new ArrayList<>();
-        for (int i =0; i < vehicles.size(); i++){
+        ArrayList<Vehicle> vehicles = MainActivity.db.getVedicle();
+        for (int i = 0; i < vehicles.size(); i++){
             vehicleName.add(vehicles.get(i).getName());
         }
-        ArrayAdapter vehiclesAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line,vehicleName);
+        ArrayAdapter vehiclesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,vehicleName);
         spnUpdateVehicle.setAdapter(vehiclesAdapter);
         Intent intent = getIntent();
         int id = intent.getIntExtra("ID", 1);
         getDiaDanh(id);
+
         btnSua.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -60,6 +59,7 @@ public class UpdateDiaDanhActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(UpdateDiaDanhActivity.this, AdminDiaDanhActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -78,16 +78,14 @@ public class UpdateDiaDanhActivity extends AppCompatActivity {
     }
 
     private void getDiaDanh(int id) {
-        DiaDanh diaDanh = db.getDiaDanhById(id);
+        DiaDanh diaDanh = MainActivity.db.getDiaDanhById(id);
         edtName.setText(diaDanh.getNameDiaDanh());
         String image = diaDanh.getImage_int();
-        String img = diaDanh.getImDiaDanh();
-        //String[] img = diaDanh.getImDiaDanh().split(";");
+        String[] img = diaDanh.getImDiaDanh().split(";");
         edtImage.setText(image);
-        edtImageDetail1.setText(img);
-//        edtImageDetail1.setText(img[0]);
-//        edtImageDetail2.setText(img[1]);
-//        edtImageDetail3.setText(img[2]);
+        edtImageDetail1.setText(img[0]);
+        edtImageDetail2.setText(img[1]);
+        edtImageDetail3.setText(img[2]);
         edtCity.setText(diaDanh.getCity());
         spnUpdateVehicle.setSelection(id);
     }
@@ -107,8 +105,7 @@ public class UpdateDiaDanhActivity extends AppCompatActivity {
             Toast.makeText(UpdateDiaDanhActivity.this, "Chưa điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             String img = String.join(";", imageDetail1, imageDetail2, imageDetail3);
-            db.openDataBase();
-            int result = db.editDiaDanh(id, name, image, img, city, 0, id_pt);
+            int result = MainActivity.db.editDiaDanh(id, name, image, img, city, 0, id_pt);
             if (result == 1) {
                 Toast.makeText(UpdateDiaDanhActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UpdateDiaDanhActivity.this, AdminDiaDanhActivity.class);

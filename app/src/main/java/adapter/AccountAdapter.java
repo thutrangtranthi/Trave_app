@@ -55,15 +55,13 @@ public class AccountAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UpdateAccountActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("ID", user.getId());
-                bundle.putInt("ID_GROUP", user.getIdGroup());
-                bundle.putString("Password", user.getPassword());
-                bundle.putString("Name", user.getName());
-                bundle.putString("Username", user.getUsername());
-                bundle.putString("Phone", user.getPhone());
-                bundle.putString("Email", user.getEmail());
-                intent.putExtras(bundle);
+                intent.putExtra("ID", user.getId());
+                intent.putExtra("ID_GROUP", user.getIdGroup());
+                intent.putExtra("Password", user.getPassword());
+                intent.putExtra("Name", user.getName());
+                intent.putExtra("Username", user.getUsername());
+                intent.putExtra("Phone", user.getPhone());
+                intent.putExtra("Email", user.getEmail());
                 context.startActivity(intent);
             }
         });
