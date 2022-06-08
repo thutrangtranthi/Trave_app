@@ -31,15 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recentRecycler;
     RecentsAdapter recentsAdapter;
-
-
     ImageButton imageUser, imageExperience, imageLogout;
     ListView lvTopplaces;
     Button btnSeeAll;
     TextView txtUserName;
+
     DiaDanhAdapter diaDanhAdapter;
     ArrayList<DiaDanh> diaDanhList;
-    public static boolean DEBUG_MODE =BuildConfig.BUILD_TYPE.equals("debug");
 
     public static ArrayList<DiaDanh> diaDanhs;
     public static Databases db;

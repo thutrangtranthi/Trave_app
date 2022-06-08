@@ -22,7 +22,6 @@ public class InsertDiaDanhActivity extends AppCompatActivity {
 
     EditText edtName, edtImage, edtImageDetail1, edtImageDetail2, edtImageDetail3, edtCity;
     Button btnThem, btnThoat;
-    Databases db;
     Spinner spnInsertVehicle;
 
     @Override
@@ -30,26 +29,19 @@ public class InsertDiaDanhActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_dia_danh);
 
-        linkView();
-
         this.setTitle("Thêm địa danh");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        db = new Databases(this);
-        ArrayList<Vehicle> vehicles = db.getVedicle();
-        ArrayList<String> vehicleName = new ArrayList<>();
-        for (int i =0; i < vehicles.size(); i++){
-            vehicleName.add(vehicles.get(i).getName());
-        }
-        ArrayAdapter vehiclesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,vehicleName);
-        spnInsertVehicle.setAdapter(vehiclesAdapter);
+        linkView();
+        loadData();
 
         btnThem.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                InsertDiaDanh();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    InsertDiaDanh();
+                }
             }
         });
         btnThoat.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +50,16 @@ public class InsertDiaDanhActivity extends AppCompatActivity {
                 startActivity(new Intent(InsertDiaDanhActivity.this, AdminDiaDanhActivity.class));
             }
         });
+    }
+
+    private void loadData() {
+        ArrayList<Vehicle> vehicles = MainActivity.db.getVedicle();
+        ArrayList<String> vehicleName = new ArrayList<>();
+        for (int i =0; i < vehicles.size(); i++){
+            vehicleName.add(vehicles.get(i).getName());
+        }
+        ArrayAdapter vehiclesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,vehicleName);
+        spnInsertVehicle.setAdapter(vehiclesAdapter);
     }
 
     private void linkView() {
@@ -89,8 +91,7 @@ public class InsertDiaDanhActivity extends AppCompatActivity {
         }else {
             img = String.join(";", imageDetail1, imageDetail2, imageDetail3);
         }
-        db.openDataBase();
-        int result = db.addDiaDanh(name, image,img, city, 0,id_pt);
+        int result = MainActivity.db.addDiaDanh(name, image, img, city, 0, id_pt);
         if (result == 1) {
             Toast.makeText(InsertDiaDanhActivity.this, "Thêm thành công", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(InsertDiaDanhActivity.this, AdminDiaDanhActivity.class));

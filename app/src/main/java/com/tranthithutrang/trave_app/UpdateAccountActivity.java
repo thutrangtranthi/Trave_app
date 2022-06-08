@@ -3,6 +3,7 @@ package com.tranthithutrang.trave_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -10,13 +11,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
+import models.Group;
 import models.User;
 
 public class UpdateAccountActivity extends AppCompatActivity {
 
     EditText edtAccountName, edtAccountEmail, edtAccountPhone, edtAccountPassword;
     Button btnAccountChange;
-    Databases db;
     Spinner spnUpdateUser;
 
     @Override
@@ -28,20 +31,27 @@ public class UpdateAccountActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = getIntent();
-
         linkViews();
+
+        Intent intent = getIntent();
         GetAccount(intent.getStringExtra("Username"));
     }
 
 
     private void linkViews() {
         edtAccountName = findViewById(R.id.edtthemAccountUserName);
-        edtAccountEmail = findViewById(R.id.edtthemAccountName);
-        edtAccountPhone = findViewById(R.id.edtthemAccountEmail);
-        edtAccountPassword = findViewById(R.id.edtthemAccountPhone);
+        edtAccountEmail = findViewById(R.id.edtthemAccountEmail);
+        edtAccountPhone = findViewById(R.id.edtthemAccountPhone);
+        edtAccountPassword = findViewById(R.id.edtthemAccountPassword);
         btnAccountChange = findViewById(R.id.btnthemAccountChange);
         spnUpdateUser = findViewById(R.id.spnUpdateUser);
+        ArrayList<Group> group = MainActivity.db.getGroup();
+        ArrayList<String> groupName = new ArrayList<>();
+        for (int i =0; i < group.size(); i++){
+            groupName.add(group.get(i).getName());
+        }
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,groupName);
+        spnUpdateUser.setAdapter(adapter);
     }
 
     private void UpdateAccount(String username) {
@@ -54,8 +64,7 @@ public class UpdateAccountActivity extends AppCompatActivity {
             Toast.makeText(this, "Chưa điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         }
         else {
-            db.openDataBase();
-            int result = db.editUser(name, username, password, email, phone, id_group);
+            int result = MainActivity.db.editUser(name, username, password, email, phone, id_group);
             if (result == 1) {
                 Toast.makeText(UpdateAccountActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(UpdateAccountActivity.this, AccountActivity.class);
@@ -68,13 +77,12 @@ public class UpdateAccountActivity extends AppCompatActivity {
     }
 
     private void GetAccount(String username) {
-        db.openDataBase();
-        User user = db.getUserByUsername(username);
+        User user = MainActivity.db.getUserByUsername(username);
         edtAccountName.setText(user.getName());
         edtAccountEmail.setText(user.getEmail());
         edtAccountPhone.setText(user.getPhone());
         edtAccountPassword.setText(user.getPassword());
-        spnUpdateUser.setSelection(user.getIdGroup());
+        spnUpdateUser.setSelection(user.getIdGroup()-1);
     }
 
     @Override

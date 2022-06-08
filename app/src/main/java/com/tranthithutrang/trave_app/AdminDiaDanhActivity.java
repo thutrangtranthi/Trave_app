@@ -21,7 +21,6 @@ public class AdminDiaDanhActivity extends AppCompatActivity {
     ArrayList<DiaDanh> list;
     AdminDiaDanhAdapter adapter;
 
-    public static Databases db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +32,11 @@ public class AdminDiaDanhActivity extends AppCompatActivity {
         this.setTitle("Quản lý địa danh");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        db = new Databases(this);
+
         listView = (ListView) findViewById(R.id.lv_DiaDanh);
         btnThem = (Button) findViewById(R.id.btn_AdminDiaDanhAdd);
         list = new ArrayList<>();
-        list = db.getDiaDanh();
+        list = MainActivity.db.getDiaDanh();
         adapter = new AdminDiaDanhAdapter(AdminDiaDanhActivity.this, list);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -49,7 +48,6 @@ public class AdminDiaDanhActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 

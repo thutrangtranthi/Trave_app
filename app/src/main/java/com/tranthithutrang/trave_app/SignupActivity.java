@@ -13,7 +13,6 @@ public class SignupActivity extends AppCompatActivity {
 
     EditText edtSignupName, edtSignupPhone, edtSignupEmail, edtSignupUsername, edtSignupPassword, edtSignupConfirmPassword;
     Button btnSignupSignup, btnSignupExit;
-    Databases db;
 
 
 
@@ -28,7 +27,6 @@ public class SignupActivity extends AppCompatActivity {
 
         linkView();
 
-        db = new Databases(this);
         btnSignupSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,10 +70,9 @@ public class SignupActivity extends AppCompatActivity {
 
             if (PhoneUp(phone)){
                 if (password.equals(confirmPassword)) {
-                    int check = db.checkUsername(username);
+                    int check = MainActivity.db.checkUsername(username);
                     if (check == 0) {
-                        db.openDataBase();
-                        int insert = db.addUser(name, username, password, email, phone, 1);
+                        int insert = MainActivity.db.addUser(name, username, password, email, phone, 1);
                         if (insert == 1) {
                             Toast.makeText(SignupActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignupActivity.this, LoginActivity.class));

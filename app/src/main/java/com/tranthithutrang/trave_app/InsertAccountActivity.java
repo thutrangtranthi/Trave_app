@@ -21,7 +21,6 @@ public class InsertAccountActivity extends AppCompatActivity {
 
     EditText edtUserName, edtName, edtEmail, edtPhone, edtPassword;
     Button btnThem;
-    Databases db;
     Spinner spnUser;
 
     @Override
@@ -38,45 +37,33 @@ public class InsertAccountActivity extends AppCompatActivity {
     }
 
     private void addEvent() {
-        db = MainActivity.db;
-        ArrayList<Group> group = db.getGroup();
+        ArrayList<Group> group = MainActivity.db.getGroup();
         ArrayList<String> groupName = new ArrayList<>();
         for (int i =0; i < group.size(); i++){
             groupName.add(group.get(i).getName());
         }
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,groupName);
         spnUser.setAdapter(adapter);
-        Intent intent = getIntent();
-        String username = intent.getStringExtra("Username");
-        GetAccount(username);
+
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertAccount(username);
+                InsertAccount();
             }
         });
     }
 
-    private void GetAccount(String username) {
-        User user = db.getUserByUsername(username);
-        edtUserName.setText(user.getUsername());
-        edtName.setText(user.getName());
-        edtEmail.setText(user.getEmail());
-        edtPhone.setText(user.getPhone());
-        edtPassword.setText(user.getPassword());
-    }
-
     private void linkViews() {
         edtUserName = findViewById(R.id.edtthemAccountUserName);
-        edtName = findViewById(R.id.edtthemAccountUserName);
-        edtEmail = findViewById(R.id.edtthemAccountName);
-        edtPhone = findViewById(R.id.edtthemAccountEmail);
-        edtPassword = findViewById(R.id.edtthemAccountPhone);
+        edtName = findViewById(R.id.edtthemAccountName);
+        edtEmail = findViewById(R.id.edtthemAccountEmail);
+        edtPhone = findViewById(R.id.edtthemAccountPhone);
+        edtPassword = findViewById(R.id.edtthemAccountPassword);
         btnThem = findViewById(R.id.btnthemAccountChange);
         spnUser = findViewById(R.id.spnUser);
     }
 
-        private void InsertAccount(String username) {
+        private void InsertAccount() {
             String userName = edtUserName.getText().toString().trim();
             String name = edtName.getText().toString().trim();
             String email = edtEmail.getText().toString().trim();
@@ -87,10 +74,18 @@ public class InsertAccountActivity extends AppCompatActivity {
                 Toast.makeText(this, "Chưa điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             }
             else {
-                db.openDataBase();
-                int result = db.editUser(name, username, password, email, phone, id_group );
+                int result = MainActivity.db.addUser(name, userName, password, email, phone, id_group );
                 if (result == 1) {
                     Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+
+                    edtUserName.setText("");
+                    edtName.setText("");
+                    edtEmail.setText("");
+                    edtPassword.setText("");
+                    edtPhone.setText("");
+                    spnUser.setSelection(0);
+                    startActivity( new Intent(InsertAccountActivity.this, AccountActivity.class));
+                    finish();
                 }
                 else {
                     Toast.makeText(this, "Thêm thất bại", Toast.LENGTH_SHORT).show();

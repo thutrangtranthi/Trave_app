@@ -18,10 +18,9 @@ public class AccountActivity extends AppCompatActivity {
 
     ListView listView;
     Button btnThemAccount;
+
     ArrayList<User> list;
     AccountAdapter adapter;
-
-    Databases db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +32,7 @@ public class AccountActivity extends AppCompatActivity {
         this.setTitle("Quản lý Account");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        db = new Databases(this);
-        list = new ArrayList<>(db.getUser());
+        list = new ArrayList<>(MainActivity.db.getUser());
         adapter = new AccountAdapter(this, list);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -44,6 +42,7 @@ public class AccountActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AccountActivity.this, InsertAccountActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -175,7 +175,7 @@
             android:layout_weight="1"
             android:backgroundTint="#F5F7F7"
             android:scaleType="fitCenter"
-            app:srcCompat="@drawable/img" />
+            app:srcCompat="@drawable/arrow_icon" />
 
     </LinearLayout>
 
