@@ -305,6 +305,7 @@ public class Databases extends SQLiteOpenHelper {
             diaDanh.setCity(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_CITY)));
             diaDanh.setFavotite(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_FAVORITE))));
             diaDanh.setImage_int(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_IMAGE_INT)));
+            diaDanh.setIdPT(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_ID_PT))));
         }
         return diaDanh;
     }
@@ -507,12 +508,23 @@ public class Databases extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Vehicle vehicle = new Vehicle();
-            vehicle.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_ID_PT))));
-            vehicle.setName(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_NAME)));
+            Vehicle vehicle = new Vehicle(Integer.parseInt(cursor.getString(cursor.getColumnIndex(Databases.COLUMN_ID_PT))),cursor.getString(cursor.getColumnIndex(Databases.COLUMN_NAME)));
 
             list.add(vehicle);
             cursor.moveToNext();
+        }
+        Log.d("ketqua", String.valueOf(list));
+        return list;
+    }
+
+    @SuppressLint("Range")
+    public ArrayList<String> getVedicleName() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<String> list = new ArrayList<>();
+        String sql = "SELECT * FROM " + Databases.TABLE_VEHICLE;
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            list.add(cursor.getString(1));
         }
         Log.d("ketqua", String.valueOf(list));
         return list;

@@ -59,7 +59,7 @@ public class UpdateAccountActivity extends AppCompatActivity {
         String email = edtAccountEmail.getText().toString().trim();
         String phone = edtAccountPhone.getText().toString().trim();
         String password = edtAccountPassword.getText().toString().trim();
-        int id_group = spnUpdateUser.getSelectedItemPosition();
+        int id_group = spnUpdateUser.getSelectedItemPosition() + 1;
         if (name == "" || email == "" || phone == "" || password == "") {
             Toast.makeText(this, "Chưa điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         }

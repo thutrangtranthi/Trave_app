@@ -69,7 +69,7 @@ public class InsertAccountActivity extends AppCompatActivity {
             String email = edtEmail.getText().toString().trim();
             String phone = edtPhone.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
-            int id_group = spnUser.getSelectedItemPosition();
+            int id_group = spnUser.getSelectedItemPosition() + 1;
             if (userName == "" || name == "" || email == "" || phone == "" || password == "") {
                 Toast.makeText(this, "Chưa điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             }
