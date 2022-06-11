@@ -53,12 +53,8 @@ public class InsertDiaDanhActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        ArrayList<Vehicle> vehicles = MainActivity.db.getVedicle();
-        ArrayList<String> vehicleName = new ArrayList<>();
-        for (int i =0; i < vehicles.size(); i++){
-            vehicleName.add(vehicles.get(i).getName());
-        }
-        ArrayAdapter vehiclesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,vehicleName);
+        ArrayList<String> vehicleSize = MainActivity.db.getVedicleName();
+        ArrayAdapter vehiclesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,vehicleSize);
         spnInsertVehicle.setAdapter(vehiclesAdapter);
     }
 

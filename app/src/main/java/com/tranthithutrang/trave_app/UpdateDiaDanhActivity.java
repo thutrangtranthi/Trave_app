@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 import models.DiaDanh;
-import models.Vehicle;
 
 public class UpdateDiaDanhActivity extends AppCompatActivity {
 
@@ -37,13 +36,7 @@ public class UpdateDiaDanhActivity extends AppCompatActivity {
         this.setTitle("Sửa địa danh");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ArrayList<String> vehicleName = new ArrayList<>();
-        ArrayList<Vehicle> vehicles = MainActivity.db.getVedicle();
-        for (int i = 0; i < vehicles.size(); i++){
-            vehicleName.add(vehicles.get(i).getName());
-        }
-        ArrayAdapter vehiclesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,vehicleName);
-        spnUpdateVehicle.setAdapter(vehiclesAdapter);
+
         Intent intent = getIntent();
         int id = intent.getIntExtra("ID", 1);
         getDiaDanh(id);
@@ -75,6 +68,10 @@ public class UpdateDiaDanhActivity extends AppCompatActivity {
         edtImageDetail3 = findViewById(R.id.edtUpdateDiaDanhImageDetail3);
         edtCity = findViewById(R.id.edtUpdateDiaDanhCity);
         spnUpdateVehicle = findViewById(R.id.spnUpdateVehicle);
+
+        ArrayList<String> vehicleSize = MainActivity.db.getVedicleName();
+        ArrayAdapter vehiclesAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,vehicleSize);
+        spnUpdateVehicle.setAdapter(vehiclesAdapter);
     }
 
     private void getDiaDanh(int id) {
@@ -87,7 +84,7 @@ public class UpdateDiaDanhActivity extends AppCompatActivity {
         edtImageDetail2.setText(img[1]);
         edtImageDetail3.setText(img[2]);
         edtCity.setText(diaDanh.getCity());
-        spnUpdateVehicle.setSelection(id);
+        spnUpdateVehicle.setSelection(diaDanh.getIdPT());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
