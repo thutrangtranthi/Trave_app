@@ -1,27 +1,35 @@
 package adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.tranthithutrang.trave_app.R;
 
 import java.util.ArrayList;
 
 import models.Experience;
 
 public class ExpAdapter extends BaseAdapter {
-    private ArrayList<Experience> list;
-    Experience experience;
-    Context context;
 
-    public ExpAdapter(Context context, ArrayList<Experience> list){
+    Context context;
+    private ArrayList<Experience> list;
+
+
+    public ExpAdapter(Context context, ArrayList<Experience> list) {
         this.context = context;
         this.list = list;
+
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return list.size();
     }
 
     @Override
@@ -36,8 +44,21 @@ public class ExpAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        view = inflater.inflate(R.layout.item_experience, null);
+        TextView txtName = view.findViewById(R.id.tvExp);
+        ImageView imvPic = view.findViewById(R.id.imExp);
+        Experience ex = list.get(i);
+        txtName.setText(ex.getName());
+        Glide.with(context)
+                .load(ex.getImage())
+                .error(R.drawable.ic_baseline_terrain_24)
+                .skipMemoryCache(true)
+                .into(imvPic);
+
+        return view;
     }
 
 
 }
+

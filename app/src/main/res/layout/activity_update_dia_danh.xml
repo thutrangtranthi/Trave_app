@@ -49,6 +49,7 @@
         android:ems="10"
         android:hint="Link hình 1"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,22 +85,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtUpdateDiaDanhImageDetail2" />
 
-    <EditText
-        android:id="@+id/edtUpdateDiaDanhImageDetail4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="#006df0"
-        android:ems="10"
-        android:hint="Link hình 4"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtUpdateDiaDanhImageDetail3" />
-
-
 
     <EditText
         android:id="@+id/edtUpdateDiaDanhCity"
@@ -114,19 +99,22 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtUpdateDiaDanhImageDetail4" />
+        app:layout_constraintTop_toBottomOf="@+id/edtUpdateDiaDanhImageDetail3" />
 
     <Spinner
-        android:id="@+id/spnUpdateDiaDanhFavorite"
+        android:id="@+id/spnUpdateVehicle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="49dp"
         android:layout_marginEnd="20dp"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtUpdateDiaDanhCity" />
+        app:layout_constraintTop_toTopOf="@+id/edtUpdateDiaDanhCity" />
+
+
 
     <Button
         android:id="@+id/btnUpdateDiaDanhSua"
@@ -140,7 +128,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/btnUpdateDiaDanhThoat"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtUpdateDiaDanhCity" />
+        app:layout_constraintTop_toBottomOf="@+id/spnUpdateVehicle" />
 
     <Button
         android:id="@+id/btnUpdateDiaDanhThoat"
@@ -155,6 +143,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnUpdateDiaDanhSua"
-        app:layout_constraintTop_toBottomOf="@+id/edtUpdateDiaDanhCity" />
+        app:layout_constraintTop_toBottomOf="@+id/spnUpdateVehicle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

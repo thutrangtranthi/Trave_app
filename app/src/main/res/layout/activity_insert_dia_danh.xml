@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InsertDiaDanhActivity">
+    tools:context=".InsertDiaDanhActivity"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/edtInsertDiaDanhName"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
@@ -17,14 +17,11 @@
         android:ems="10"
         android:hint="Tên địa danh"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/edtInsertDiaDanhImage"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
@@ -33,30 +30,23 @@
         android:ems="10"
         android:hint="Link hình ảnh chính"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtInsertDiaDanhName" />
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/edtInsertDiaDanhImageDetail1"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="#006df0"
         android:ems="10"
         android:hint="Link hình 1"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtInsertDiaDanhImage" />
+        android:inputType="textPersonName"/>
 
     <EditText
         android:id="@+id/edtInsertDiaDanhImageDetail2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
@@ -64,14 +54,11 @@
         android:backgroundTint="#006df0"
         android:ems="10"
         android:hint="Link hình 2"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtInsertDiaDanhImageDetail1" />
+        android:inputType="textPersonName"/>
 
     <EditText
         android:id="@+id/edtInsertDiaDanhImageDetail3"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
@@ -80,69 +67,54 @@
         android:ems="10"
         android:hint="Link hình 3"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtInsertDiaDanhImageDetail2" />
-
-    <EditText
-        android:id="@+id/edtInsertDiaDanhImageDetail4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        android:backgroundTint="#006df0"
-        android:ems="10"
-        android:hint="Link hình 4"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtInsertDiaDanhImageDetail3" />
-
+        android:minHeight="48dp" />
 
 
     <EditText
         android:id="@+id/edtInsertDiaDanhCity"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="#006df0"
         android:ems="10"
         android:hint="Tỉnh/thành phố"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtInsertDiaDanhImageDetail4" />
+        android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/btnInsertDiaDanhThem"
-        android:layout_width="0dp"
+    <Spinner
+        android:id="@+id/spnInsertVehicle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="12dp"
-        android:backgroundTint="#006df0"
-        android:text="Thêm"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/btnInsertDiaDanhThoat"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtInsertDiaDanhCity" />
-
-    <Button
-        android:id="@+id/btnInsertDiaDanhThoat"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
-        android:backgroundTint="#006df0"
-        android:text="Thoát"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnInsertDiaDanhThem"
-        app:layout_constraintTop_toBottomOf="@+id/edtInsertDiaDanhCity" />
+        android:minHeight="48dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btnInsertDiaDanhThem"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
+            android:backgroundTint="#006df0"
+            android:text="Thêm"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnInsertDiaDanhThoat"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#006df0"
+            android:text="Thoát"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

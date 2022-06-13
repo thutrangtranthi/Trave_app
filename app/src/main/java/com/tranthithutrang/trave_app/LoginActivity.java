@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import models.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -17,11 +19,42 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtLoginUsername, edtLoginPassword;
     Databases db;
 
-    private void Mapping() {
-        btnLoginLogin = (Button) findViewById(R.id.btnLoginLogin);
-        btnLoginSignup = (Button) findViewById(R.id.btnLoginSignup);
-        edtLoginUsername = (EditText) findViewById(R.id.edtLoginUsername);
-        edtLoginPassword = (EditText) findViewById(R.id.edtLoginPassword);
+    ArrayList<User> list;
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+        linkView();
+
+        db = new Databases(this);
+        btnLoginLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Login();
+            }
+        });
+
+        btnLoginSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+            }
+        });
+    }
+
+    private void linkView() {
+        btnLoginLogin = findViewById(R.id.btnLoginLogin);
+        btnLoginSignup = findViewById(R.id.btnLoginSignup);
+        edtLoginUsername = findViewById(R.id.edtLoginUsername);
+        edtLoginPassword = findViewById(R.id.edtLoginPassword);
     }
 
     private void Login() {
@@ -38,11 +71,8 @@ public class LoginActivity extends AppCompatActivity {
             if (check == 1) {
                 Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("Username", username);
-                bundle.putString("NameOfUser", user.getName());
-                bundle.putInt("IdGroup", user.getIdGroup());
-                intent.putExtras(bundle);
+                intent.putExtra("Name", user.getName());
+                intent.putExtra("ID_Group", user.getIdGroup());
                 startActivity(intent);
             }
             else {
@@ -51,29 +81,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-
-        Mapping();
-        db = new Databases(this);
-        btnLoginLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Login();
-            }
-        });
-
-        btnLoginSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignupActivity.class));
-            }
-        });
-    }
 }

@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/drawable/book_button_bg.xml" value="0.1" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/drawable/ic_arrow_back_black_24dp.xml" value="0.1" />
+        <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/drawable/ic_baseline_like_24.xml" value="0.1495" />
+        <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/drawable/ic_baseline_like_24_blue.xml" value="0.1495" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.1" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/drawable/search_bg.xml" value="0.1" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/font/roboto.xml" value="0.1" />
@@ -12,7 +14,7 @@
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/activity_account.xml" value="0.128" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/activity_account_fragment.xml" value="0.128" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/activity_admin_dia_danh.xml" value="0.176" />
-        <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/activity_details.xml" value="0.264" />
+        <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/activity_details.xml" value="0.25" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/activity_exp.xml" value="0.2578125" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/activity_insert_dia_danh.xml" value="0.2" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/activity_introduce.xml" value="0.25416666666666665" />
@@ -24,9 +26,14 @@
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/fragment_exp.xml" value="0.2578125" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/input_search.xml" value="0.264" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/item_admindiadanh.xml" value="0.1" />
-        <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/recents_row_item.xml" value="0.536" />
+        <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/recents_row_item.xml" value="0.25416666666666665" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/layout/top_places_row_item.xml" value="0.2" />
         <entry key="..\:/H2K2NAM3/androidproject/ThucTapChuyenMon/app/src/main/res/menu/activity_main_drawer.xml" value="0.1" />
+        <entry key="..\:/Workspace/My Document/Mobile Programing/Travel_App/app/src/main/res/layout/activity_insert_account.xml" value="0.20833333333333334" />
+        <entry key="..\:/Workspace/My Document/Mobile Programing/Travel_App/app/src/main/res/layout/activity_insert_dia_danh.xml" value="0.20833333333333334" />
+        <entry key="..\:/Workspace/My Document/Mobile Programing/Travel_App/app/src/main/res/layout/activity_main.xml" value="0.20512820512820512" />
+        <entry key="..\:/Workspace/My Document/Mobile Programing/Travel_App/app/src/main/res/layout/activity_update_account.xml" value="0.20833333333333334" />
+        <entry key="..\:/Workspace/My Document/Mobile Programing/Travel_App/app/src/main/res/layout/activity_update_dia_danh.xml" value="0.20833333333333334" />
       </map>
     </option>
   </component>

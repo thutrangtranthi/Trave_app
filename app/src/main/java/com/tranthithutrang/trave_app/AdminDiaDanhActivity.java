@@ -17,28 +17,27 @@ import models.DiaDanh;
 public class AdminDiaDanhActivity extends AppCompatActivity {
 
     ListView listView;
-    Button btnThem;
+    Button btnThem, btnSua, btnXoa;
     ArrayList<DiaDanh> list;
     AdminDiaDanhAdapter adapter;
-    Databases db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dia_danh);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
+        linkView();
 
         this.setTitle("Quản lý địa danh");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        db = new Databases(this);
+
         listView = (ListView) findViewById(R.id.lv_DiaDanh);
         btnThem = (Button) findViewById(R.id.btn_AdminDiaDanhAdd);
         list = new ArrayList<>();
-        adapter = new AdminDiaDanhAdapter(this, list);
+        list = MainActivity.db.getDiaDanh();
+        adapter = new AdminDiaDanhAdapter(AdminDiaDanhActivity.this, list);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         btnThem.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +47,15 @@ public class AdminDiaDanhActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+
+
+    private void linkView() {
+        listView = findViewById(R.id.lv_DiaDanh);
+        btnThem = findViewById(R.id.btn_AdminDiaDanhAdd);
+        btnSua = findViewById(R.id.btn_AdminDiaDanhEdit);
+        btnXoa = findViewById(R.id.btn_AdminDiaDanhDelete);
     }
 
     @Override

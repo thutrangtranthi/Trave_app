@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imgTop" />
 
     <EditText
         android:id="@+id/edtSignupPhone"
@@ -31,7 +31,7 @@
         android:backgroundTint="#006df0"
         android:ems="10"
         android:hint="Số điện thoại"
-        android:inputType="textPersonName"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/edtSignupPassword" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imgTop"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="24dp"
