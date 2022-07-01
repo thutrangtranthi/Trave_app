@@ -106,13 +106,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
                 DiaDanh diaDanh = diaDanhs.get(i);
-                intent.putExtra("Name", diaDanh.getNameDiaDanh());
+//                intent.putExtra("Name", diaDanh.getNameDiaDanh());
                 intent.putExtra("ID", diaDanh.getIdDiaDanh());
-                intent.putExtra("IDPT", diaDanh.getIdPT());
-                intent.putExtra("City", diaDanh.getCity());
-                intent.putExtra("Image_INT", diaDanh.getImage_int());
+//                intent.putExtra("IDPT", diaDanh.getIdPT());
+//                intent.putExtra("City", diaDanh.getCity());
+//                intent.putExtra("Image_INT", diaDanh.getImage_int());
                 intent.putExtra("Image", diaDanh.getImDiaDanh());
-                intent.putExtra("Favourite", diaDanh.getFavotite());
+//                intent.putExtra("Favourite", diaDanh.getFavotite());
                 startActivity(intent);
             }
         });
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadData() {
 
-        diaDanhs = db.getTopDiaDanh();
+        diaDanhs = db.getFavorite();
         diaDanhAdapter = new DiaDanhAdapter(MainActivity.this, R.layout.top_places_row_item, diaDanhs);
         lvTopplaces.setAdapter(diaDanhAdapter);
         setRecentRecycler(diaDanhList);
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setRecentRecycler(List<DiaDanh> diaDanhList){
-        diaDanhList = db.getFavorite();
+        diaDanhList = db.getTopDiaDanh();
         recentRecycler = findViewById(R.id.recent_recycler);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         recentRecycler.setLayoutManager(layoutManager);

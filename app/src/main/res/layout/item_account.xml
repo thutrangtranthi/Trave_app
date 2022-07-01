@@ -14,7 +14,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:textSize="28sp"
-        android:textColor="#000"></TextView>
+        android:textColor="#000"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:text="Sửa"
             android:textSize="18sp"
             android:backgroundTint="#006df0"
-            android:layout_gravity="center"></Button>
+            android:layout_gravity="center"/>
         <Button
             android:id="@+id/btn_AccountDelete"
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
             android:text="Xóa"
             android:textSize="18sp"
             android:backgroundTint="#006df0"
-            android:layout_gravity="center"></Button>
+            android:layout_gravity="center"/>
     </LinearLayout>
 
 </LinearLayout>

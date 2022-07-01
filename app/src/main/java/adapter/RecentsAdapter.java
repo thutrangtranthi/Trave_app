@@ -60,11 +60,8 @@ public class RecentsAdapter extends RecyclerView.Adapter<RecentsAdapter.RecentsV
             public void onClick(View view) {
                 Intent i = new Intent(context, DetailsActivity.class);
                 DiaDanh diaDanh = diaDanhList.get(position);
-                i.putExtra("Name", diaDanh.getNameDiaDanh());
-                i.putExtra("City", diaDanh.getCity());
-                i.putExtra("Image_INT", diaDanh.getImage_int());
+                i.putExtra("ID", diaDanh.getIdDiaDanh());
                 i.putExtra("Image", diaDanh.getImDiaDanh());
-                i.putExtra("Favourite", diaDanh.getFavotite());
                 context.startActivity(i);
             }
         });

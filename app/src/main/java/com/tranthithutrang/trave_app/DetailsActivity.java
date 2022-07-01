@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,19 +38,24 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = getIntent();
-                DiaDanh newDiaDanh = new DiaDanh(
-                        intent.getIntExtra("ID",0),
-                        intent.getStringExtra("Name"),
-                        intent.getStringExtra("Image"),
-                        intent.getStringExtra("Image_INT"),
-                        intent.getStringExtra("City"),
-                        intent.getIntExtra("Favorite",0),
-                        intent.getIntExtra("IDPT",0)
-                );
-                if(intent.getIntExtra("Favourite",0) == 1){
+//                DiaDanh newDiaDanh = new DiaDanh(
+//                        intent.getIntExtra("ID",0),
+//                        intent.getStringExtra("Name"),
+//                        intent.getStringExtra("Image"),
+//                        intent.getStringExtra("Image_INT"),
+//                        intent.getStringExtra("City"),
+//                        intent.getIntExtra("Favorite",0),
+//                        intent.getIntExtra("IDPT",0)
+//                );
+                DiaDanh newDiaDanh = MainActivity.db.getDiaDanhById( intent.getIntExtra("ID",0));
+                if(MainActivity.db.getDiaDanhById(newDiaDanh.getIdDiaDanh()).getFavotite()==1){
                     MainActivity.db.editDiaDanh(newDiaDanh.getIdDiaDanh(),newDiaDanh.getNameDiaDanh(),newDiaDanh.getImDiaDanh(),newDiaDanh.getImage_int(),newDiaDanh.getCity(),0,newDiaDanh.getIdPT());
+                    btnFavouite.setImageDrawable(getResources().getDrawable( R.drawable.ic_baseline_like_24));
+                    Toast.makeText(DetailsActivity.this, "Đã xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
                 }else{
                     MainActivity.db.editDiaDanh(newDiaDanh.getIdDiaDanh(),newDiaDanh.getNameDiaDanh(),newDiaDanh.getImDiaDanh(),newDiaDanh.getImage_int(),newDiaDanh.getCity(),1,newDiaDanh.getIdPT());
+                    btnFavouite.setImageDrawable(getResources().getDrawable( R.drawable.ic_baseline_like_24_blue));
+                    Toast.makeText(DetailsActivity.this, "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -57,10 +63,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     private void initActivity() {
         Intent intent = getIntent();
-        txtCity.setText(intent.getStringExtra("City"));
-        txtName.setText(intent.getStringExtra("Name"));
+        DiaDanh newDiaDanh = MainActivity.db.getDiaDanhById( intent.getIntExtra("ID",0));
+        txtCity.setText(newDiaDanh.getCity());
+        txtName.setText(newDiaDanh.getNameDiaDanh());
         Glide.with(this)
-                .load(intent.getStringExtra("Image_INT"))
+                .load(newDiaDanh.getImage_int())
                 .error(R.drawable.ic_baseline_terrain_24)
                 .skipMemoryCache(true)
                 .into(imgAnhChinh);
@@ -80,7 +87,7 @@ public class DetailsActivity extends AppCompatActivity {
                     .error(R.drawable.ic_baseline_terrain_24)
                     .skipMemoryCache(true)
                     .into(imgAnhPhu3);
-        if(intent.getIntExtra("Favourite", 0) == 1)
+        if(newDiaDanh.getFavotite()== 1)
             btnFavouite.setImageDrawable(getResources().getDrawable( R.drawable.ic_baseline_like_24_blue));
         }
 
@@ -97,5 +104,9 @@ public class DetailsActivity extends AppCompatActivity {
 
     public void goback(View view) {
         finish();
+        Intent intent = getIntent();
+        Intent intent1 = new Intent(DetailsActivity.this, MainActivity.class);
+        intent1.putExtra("ID_Group", intent.getIntExtra("ID_Group",0));
+        startActivity(intent1);
     }
 }

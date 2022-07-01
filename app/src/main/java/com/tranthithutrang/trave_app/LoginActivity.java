@@ -73,7 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("Name", user.getName());
                 intent.putExtra("ID_Group", user.getIdGroup());
+                Intent intentDetail = new Intent(LoginActivity.this, DetailsActivity.class);
+                intentDetail.putExtra("ID_Group", user.getIdGroup());
                 startActivity(intent);
+                finish();
             }
             else {
                 Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
